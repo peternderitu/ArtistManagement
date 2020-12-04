@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Artist Management</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+</head>
+
+<body class = "font">
+    <h1>Artist Management</h1>
+  <div class = "step">
+    <p class = "step"> Step 1: Add info to appropriate role</p>
+    <p class = "step"> If false, try again! </p>
+    <p class = "step" id = "divType"></p>
+    <p id="accountAddress" class="text-center"></p>
+    <div class = "outline"style = "height: 100px; display: flex;">
+        <button class = "button" data-id="1">Add Artist</button>
+        <p>Name:</p><input id = "name" class = "inputFeilds">
+        <p>Citizenship:</p><input id = "citizenship" class = "inputFeilds">
+        <p>Age:</p><input id = "age" class = "inputFeilds">
+        <p id = "isartist" class =  "inputFeilds"></p>
+
+    </div>
+</div>
+
+<div class = "step">
+    <p class = "step ">Validate the authenticity of the product</p>
+    <div class = "outline">
+        <div class = "contain">
+            <p class = 'font'>ArtistId:</p><input class = "inputFeilds" id = "artistId1">
+        </div>
+    </div>
+    <div class = "outline" style="
+    margin: 1%;">
+        <button class = "button" data-id="6" style="height: 40px; margin: auto;">Fetch Artist</button>
+    </div>
+    <div id = "BlockInfoArtist">
+
+    </div>
+</div>
+<div class = "step">
+    <p class = "step ">Validate the authenticity of the product</p>
+    <div class = "outline">
+        <div class = "contain">
+            <p class = 'font'>Music Id:</p><input class = "inputFeilds" id = "musicId1">
+        </div>
+    </div>
+    <div class = "outline" style="
+    margin: 1%;">
+        <button class = "button" data-id="7" style="height: 40px; margin: auto;">Fetch Music</button>
+    </div>
+    <div id = "BlockInfoMusic">
+
+    </div>
+</div>
+<div class = "step">
+    <p class = "step ">Validate the authenticity of the product</p>
+    <div class = "outline">
+        <div class = "contain">
+            <p class = 'font'>Manager Id:</p><input class = "inputFeilds" id = "managerId1">
+        </div>
+    </div>
+    <div class = "outline" style="
+    margin: 1%;">
+        <button class = "button" data-id="8" style="height: 40px; margin: auto;">Fetch Manager</button>
+    </div>
+    <div id = "BlockInfoManager">
+
+    </div>
+</div>
+
+    
+<div class = "step">
+    <p class = "step">REGISTER MUSIC</p>
+    <div class = "outline">
+        <div class = "contain font">
+            <p>Name:</p><input id = "name2" class = "inputFeilds" value="Low" >
+            <p>Genre:</p><input id = "genre" class = "inputFeilds" value="HipHop" >
+            <p>Price(ETH):</p><input id = "sellprice" class = "inputFeilds" value="44">
+            <p>ArtistID:</p><input id = "artistId" class = "inputFeilds" value="1">
+            <h3> Choose file to send to IPFS </h3>
+          <Form onSubmit={addmusic}>
+            <input 
+              type = "file"
+              onChange = {captureFile}
+            />
+             <Button 
+             bsStyle="primary" 
+             type="submit"> 
+             Send it 
+             </Button>
+          </Form>
+
+        </div>
+    </div>
+    <div class = "outline" style="
+    margin: 1%;">
+        <button class = "button" data-id="2">Add music</button>
+        <p id = "musicadded" class = "font">
+        </p>
+    </div>
+</div>
+<div class = "step">
+    <p class = "step">ADD MANAGER</p>
+    <div class = "outline">
+        <div class = "contain font">
+            <p>Name:</p><input id = "name3" class = "inputFeilds" value="George" >
+            <p>Salary(ETH):</p><input id = "hiresalary" class = "inputFeilds" value="3" >
+        </div>
+    </div>
+    <div class = "outline" style="
+    margin: 1%;">
+        <button class = "button" data-id="4">Add manager</button>
+        <p id = "manageradded" class = "font">
+        </p>
+    </div>
+</div>
+
+
+<div class = "step">
+    <p class = "step">Purchase Music </p>
+    <div class = "outline">
+        <div class = "contain">
+            <p>MusicId:</p><input id = "purchasemusicId" class = "inputFeilds">
+            <p>ArtistId:</p><input id = "purchaseartistId" class = "inputFeilds">
+        </div>
+    </div>
+
+      <div class = "outline" style="margin: 1%; display: flex;">
+        <button class = "button" data-id="3">Step 4: Purchase Music</button>
+        <p id = "pid" class = "font"></p>
+      </div>
+  </div>
+  <div class = "step">
+    <p class = "step">Hire Manager </p>
+    <div class = "outline">
+        <div class = "contain">
+            <p>ManagerId:</p><input id = "ManagerId" class = "inputFeilds">
+            <p>Period in Months:</p><input id = "periodinmonths" class = "inputFeilds">
+        </div>
+    </div>
+
+      <div class = "outline" style="margin: 1%; display: flex;">
+        <button class = "button" data-id="5">Step 5: Hire Manager</button>
+        <p id = "hire" class = "font"></p>
+      </div>
+  </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <!-- <script src="js/web3.min.js"></script> -->
+    <script src="js/truffle-contract.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+
+</html>
