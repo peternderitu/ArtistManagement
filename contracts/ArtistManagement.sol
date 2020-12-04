@@ -9,20 +9,21 @@ import "./SafeMath.sol";
 /// @dev All function calls are currently implemented without side effects
 contract ArtistManagement {
     using SafeMath for uint256;
-
+// state variables including contract owner
     address owner;
     uint256 private musicidCount;
     uint256 private artistCount;
     uint256 private managerCount;
+// enum that describes the state of Music
     enum State {ForSale, Sold}
-
+// evwnts of all state changes
     event LogForSale(uint256 musicId);
     event LogSold(uint256 musicId);
     event Logaddartist(string name, string citizenship, uint256 age);
     event Logaddmusic(string name, string genre, uint256 price);
     event Logaddmanager(string name, address addr, uint256 salary);
     event Loghiremanager(uint256 managerid);
-
+// the manager,artist and music structs
     struct Manager {
         string name;
         address payable addr;
@@ -46,6 +47,7 @@ contract ArtistManagement {
     }
 
     Music[13] public catalog;
+   // Circuit breaker design pattern
     bool public stopped = false;
 
     modifier stopInEmergency {
@@ -56,24 +58,29 @@ contract ArtistManagement {
         require(stopped);
         _;
     }
+    // A lookup of all the structs with their id as the key value
     mapping(uint256 => Artist) public artists;
     mapping(uint256 => Music) public music;
     mapping(uint256 => Manager) public managers;
+    
+    // checks that msg.value is same as price and refunds buyer any extra eth sent
     modifier checkValue(uint256 _musicid) {
         _;
         uint256 _price = music[_musicid].price;
         uint256 amountToRefund = msg.value - _price;
         music[_musicid].buyer.transfer(amountToRefund);
     }
+    //modifier that restricts a function's access to artist
     modifier onlyArtist(uint256 _artistId) {
         require(msg.sender == artists[_artistId].artist);
         _;
     }
+    // modifier marks music item forsale after being added into mapping
     modifier forsale(uint256 _musicId) {
         music[_musicId].musicstate = State.ForSale;
         _;
     }
-
+// this changes state after music item is paid
     modifier sold(uint256 _musicId) {
         music[_musicId].musicstate = State.Sold;
         _;
