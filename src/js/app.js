@@ -57,7 +57,6 @@ App = {
         else {
             App.web3Provider = new Web3.providers.HttpProvider('http://localhost:8545');
         }
-        
 
         //App.web3Provider = new Web3.providers.HttpProvider('http://localhost:7545');
         //App.getMetaskAccountID();
@@ -84,11 +83,11 @@ App = {
             if (res.length > 1){
             document.getElementById("divType").innerText = "Ganache Address"
             console.log("Using Ganache");
-            App.artist= res[1];
+            App.FarmerID = res[1];
             document.getElementById("artist").value = App.artist;
-            App.buyer = res[2];
+            App.DistributorID = res[2];
             document.getElementById("buyer").value = App.buyer;
-            App.addr = res[3];
+            App.RetailerID = res[3];
             document.getElementById("addr").value = App.addr;
           }else{
             document.getElementById("divType").innerText = "Using MetaMask Address"
@@ -117,17 +116,7 @@ App = {
     bindEvents: function() {
         $(document).on('click', App.handleButtonClick);
     },
-    captureFile(event) {
-      event.stopPropagation()
-      event.preventDefault()
-      const file = event.target.files[0]
-      let reader = new window.FileReader()
-      reader.readAsArrayBuffer(file)
-      reader.onloadend = () => {
-        const buffer = Buffer.from(reader.result)
-        console.log('buffer', buffer)
-      }   
-    },
+    
     handleButtonClick: async function(event) {
         event.preventDefault();
         App.getMetaskAccountID();
@@ -195,20 +184,14 @@ addmusic: function (event) {
   var price = document.getElementById("sellprice").value;
   var artistId = $("#artistId").val();
   var resultTag = document.getElementById("musicadded");
-  const IPFS = require('ipfs-api');
-  const ipfs = new IPFS({ host: 'ipfs.infura.io', port: 5001, protocol: 'https' });
-  ipfs.files.add(buffer, (err, res) => {
-    console.log(err, res)
-    const ipfsHash = res[0].hash
-  }).then(function(res){
-    App.contracts.ArtistManagement.deployed().then(function(instance) {
+  App.contracts.ArtistManagement.deployed().then(function(instance) {
       resultTag.className = " loader";
       return instance.fetchArtist(artistId);
     }).then(function(result) {
       var artistId = result[3];
       var artist = result[4];
       App.contracts.ArtistManagement.deployed().then(function(instance) {
-        return instance.addmusic(App.title, App.genre,res[0].hash, price, artistId, {from: artist, gas: 3000000 });
+        return instance.addmusic(App.title, App.genre, price, artistId, {from: artist, gas: 3000000 });
       }).then(function(result) {
         resultTag.className = " font";
         resultTag.innerText = "  Tx Hash: "+result.tx;
@@ -222,8 +205,6 @@ addmusic: function (event) {
     resultTag.innerText = "  Error: "+err.message;
 
   });
-  })
-  
 
 },
 	
@@ -347,11 +328,10 @@ addmusic: function (event) {
 
           "Name: "+result[0]+"<br>"+
           "Genre: "+result[1]+"<br>"+
-          "IpfsHash: "+result[2]+"<br>"+
-          "Music State: "+result[3]+"<br>"+
-          "Price "+result[4]+"<br>"+
-		  "Music Id: "+result[5]+"<br>"+
-		  "Buyer: "+result[6]
+          "Music State: "+result[2]+"<br>"+
+          "Price "+result[3]+"<br>"+
+		  "Music Id: "+result[4]+"<br>"+
+		  "Buyer: "+result[5]
           );
 
         }).catch(function(err) {
