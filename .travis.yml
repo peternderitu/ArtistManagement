@@ -9,7 +9,7 @@ before_script:
 script:
   - git clone https://github.com/peternderitu/ArtistManagement/blob/master/test/artist_management.test.js
   - rm ./test/artist_management.test.js
-  - mv ./test/simpleBank.test.js
+  - mv ./test/artist_management.test.js
   - ganache-cli &
   - sleep 5
   - truffle test
