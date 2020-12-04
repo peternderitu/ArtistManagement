@@ -1,0 +1,15 @@
+language: node_js
+node_js:
+  - "10"
+
+before_script:
+  - npm install -g ganache-cli
+  - npm install -g truffle
+
+script:
+  - git clone https://github.com/peternderitu/ArtistManagement/blob/master/test/artist_management.test.js
+  - rm ./test/artist_management.test.js
+  - mv ./test/simpleBank.test.js
+  - ganache-cli &
+  - sleep 5
+  - truffle test
