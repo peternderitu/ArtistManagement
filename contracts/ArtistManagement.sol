@@ -19,7 +19,7 @@ contract ArtistManagement {
     event LogForSale(uint256 musicId);
     event LogSold(uint256 musicId);
     event Logaddartist(string name, string citizenship, uint256 age);
-    event Logaddmusic(string name, string genre, string m, uint256 price);
+    event Logaddmusic(string name, string genre, uint256 price);
     event Logaddmanager(string name, address addr, uint256 salary);
     event Loghiremanager(uint256 managerid);
 
@@ -39,7 +39,6 @@ contract ArtistManagement {
     struct Music {
         string name;
         string genre;
-        string ipfsHash;
         State musicstate;
         uint256 price;
         uint256 musicId;
@@ -113,7 +112,6 @@ contract ArtistManagement {
     function addmusic(
         string memory name,
         string memory genre,
-        string memory m,
         uint256 price,
         uint256 artistId
     ) public onlyArtist(artistId) {
@@ -121,13 +119,12 @@ contract ArtistManagement {
         music[musicidCount] = Music(
             name,
             genre,
-            m,
             State.ForSale,
             price,
             musicidCount,
             address(0)
         );
-        emit Logaddmusic(name, genre, m, price);
+        emit Logaddmusic(name, genre, price);
         emit LogForSale(musicidCount);
     }
 
@@ -138,7 +135,6 @@ contract ArtistManagement {
         payable
         forsale(_musicId)
         checkValue(_musicId)
-        onlyInEmergency
     {
         music[_musicId].buyer = msg.sender;
         artists[_artistId].artist.transfer(music[_musicId].price);
@@ -171,7 +167,6 @@ contract ArtistManagement {
     function hiremanager(uint256 managerid, uint256 periodinmonths)
         public
         payable
-        onlyInEmergency
     {
         require(periodinmonths > 0);
         uint256 salarypaid = periodinmonths.mul(managers[managerid].salary);
@@ -208,7 +203,6 @@ contract ArtistManagement {
         returns (
             string memory name,
             string memory genre,
-            string memory ipfsHash,
             uint256 musicstate,
             uint256 price,
             uint256 musicId,
@@ -217,12 +211,11 @@ contract ArtistManagement {
     {
         name = music[_musicid].name;
         genre = music[_musicid].genre;
-        ipfsHash = music[_musicid].ipfsHash;
         musicstate = uint256(music[_musicid].musicstate);
         price = music[_musicid].price;
         musicId = music[_musicid].musicId;
         buyer = music[_musicid].buyer;
-        return (name, genre, ipfsHash, musicstate, price, musicId, buyer);
+        return (name, genre, musicstate, price, musicId, buyer);
     }
 
     /* We have these functions completed to run tests as well as fetch data:) */
