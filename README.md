@@ -47,5 +47,7 @@ Quick Start
 	truffle migrate
 7. Run tests
 	truffle test
-8. Start FrontEnd
+8. Deploying on ropsten test network
+	truffle migrate --network ropsten
+9. Start FrontEnd
 	npm run dev
