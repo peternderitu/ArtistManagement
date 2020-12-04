@@ -1,4 +1,5 @@
 1. Circuit Breaker design pattern:
+	```bash
 	bool public stopped = false;
 
     modifier stopInEmergency {
@@ -21,13 +22,17 @@
         music[_musicId].musicstate = State.Sold;
         emit LogSold(_musicId);
     }
+    ```
 2. Restricting Access(Having private state variables): 
+	```bash
 	uint256 private musicidCount;
     	uint256 private artistCount;
     	uint256 private managerCount;
-	
+	```
 	Having a function that can only be called by the Artist
+	```bash
 		modifier onlyArtist(uint256 _artistId) {
         		require(msg.sender == artists[_artistId].artist);
         		_;
     		}
+		```
