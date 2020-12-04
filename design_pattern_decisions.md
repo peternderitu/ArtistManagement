@@ -1,4 +1,4 @@
-1. Circuit Breaker design pattern:
+### 1. Circuit Breaker design pattern:
 	```bash
 	bool public stopped = false;
 
@@ -23,7 +23,7 @@
         emit LogSold(_musicId);
     }
     ```
-2. Restricting Access(Having private state variables): 
+### 2. Restricting Access(Having private state variables): 
 	```bash
 	uint256 private musicidCount;
     	uint256 private artistCount;
@@ -35,4 +35,4 @@
         		require(msg.sender == artists[_artistId].artist);
         		_;
     		}
-		```
+	```
