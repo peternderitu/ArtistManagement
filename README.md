@@ -1,6 +1,6 @@
 # ArtistManagement
 Description
-A smart contract written to manage artists affairs and create a music store for their art. Its deployed on the Rinkeby test network.
+A smart contract written to manage artists affairs and create a music store for their art. Its deployed on the Ropsten test network.
 The project aims at automating and helping independent artists manage, sell and transparently earn majority of revenues from their art.
 
 Project Directory
