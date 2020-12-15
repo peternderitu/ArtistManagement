@@ -47,23 +47,24 @@ The project aims at automating and helping independent artists manage, sell and 
 	```bash
 	ganache-cli
 	```
-5. Compile contracts
+5. Add .secret file in repo and add your seed phrase for metamask account.
+6. Compile contracts
 	```bash
 	truffle compile
 	```
-6. Migrate
+7. Migrate
 	```bash
 	truffle migrate
 	```
-7. Run tests
+8. Run tests
 	```bash
 	truffle test
 	```
-8. Deploying on ropsten test network
+9. Deploying on ropsten test network
 	```bash
 	truffle migrate --network ropsten
 	```
-9. Start FrontEnd
+10. Start FrontEnd
 	```bash
 	npm run dev
 	```
